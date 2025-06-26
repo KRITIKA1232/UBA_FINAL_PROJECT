@@ -1,0 +1,63 @@
+* {
+  margin: 0 ;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Full height and width for layout containers */
+html, body, #root {
+  height: 100vh;
+  width: 100vmax;
+  font-family: sans-serif;
+  background-color: #121212; 
+  color: #fff;
+}
+
+/* Optional: Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* If you still want to center content, use a wrapper inside #root */
+/* .wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+} */
+
+/* Styles you already had for logos, cards, etc. */
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  transition: filter 300ms;
+  will-change: filter;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
