@@ -1,4 +1,4 @@
-import { Box, Button, Container, InputAdornment, Slider, TextField, Typography } from "@mui/material";
+import { Box, Button, Container, InputAdornment, Slider, TextField, Typography, Select, MenuItem, FormControl, InputLabel } from "@mui/material";
 import PreviewList from "../fontPreview/PreviewList.tsx";
 import { useEffect, useState } from "react";
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
@@ -14,6 +14,13 @@ const initialPreview: preview = {
     color: "#fff",
     backgroundColor: "#222"
 };
+
+const languageOptions = [
+  { code: "en", label: "English", sample: "Type something..." },
+  { code: "hi", label: "Hindi", sample: "कुछ लिखें..." },
+  { code: "ne", label: "Nepali", sample: "केहि लेख्नुहोस्..." },
+  { code: "zh", label: "Chinese", sample: "输入一些内容..." },
+];
 
 function Page() {
     const [searchParam, setParam] = useSearchParams();
@@ -32,6 +39,7 @@ function Page() {
     const [preview, setPreview] = useState<preview>(param);
     const [fonts, setFonts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [language, setLanguage] = useState(languageOptions[0].code);
 
     useEffect(() => {
         getFonts().then(result => {
@@ -98,10 +106,43 @@ function Page() {
                         max={120}
                         value={preview.size}
                         onChange={(_, value) => setPreview({ ...preview, size: value })}
-                        sx={{ color: "#90caf9" }}
+                        sx={{ color: "#1976d2" }}
                     />
                     <Typography>{preview.size}px</Typography>
                 </Box>
+                {/* Only text color picker, palette only, with border */}
+                <Box sx={{display: 'inline-block' }}>
+                    <ColorPicker
+                        color={preview.color}
+                        onChange={newColor => setPreview({ ...preview, color: newColor })}
+                    />
+                </Box>
+                {/* Language selector */}
+                <FormControl fullWidth size="small" sx={{ mt: 2 }}>
+                    <InputLabel id="language-select-label" sx={{ color: "#aaa" }}>Language</InputLabel>
+                    <Select
+                        labelId="language-select-label"
+                        value={language}
+                        label="Language"
+                        onChange={e => {
+                            setLanguage(e.target.value);
+                            const selected = languageOptions.find(l => l.code === e.target.value);
+                            if (selected) setPreview(prev => ({ ...prev, text: selected.sample }));
+                        }}
+                        sx={{
+                            color: "#fff",
+                            background: "#232323",
+                            '.MuiOutlinedInput-notchedOutline': { borderColor: "#444" },
+                            '&.Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: "#1976d2" },
+                            '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: "#1976d2" },
+                            '.MuiSvgIcon-root': { color: "#aaa" }
+                        }}
+                    >
+                        {languageOptions.map(lang => (
+                            <MenuItem key={lang.code} value={lang.code}>{lang.label}</MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
                 <Button
                     variant="outlined"
                     color="inherit"

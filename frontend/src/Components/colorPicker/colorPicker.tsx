@@ -1,47 +1,38 @@
 import { useEffect, useState } from "react";
-import { Box, TextField, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 interface colorPickerProps {
     color: string,
-    label: string,
     onChange: (color: string) => void,
 }
-function ColorPicker({ color, label, onChange }: colorPickerProps) {
+function ColorPicker({ color, onChange }: colorPickerProps) {
     const [colorValue, setColorValue] = useState(color);
 
     useEffect(() => {
         setColorValue(color);
     }, [color]);
 
-    const handleChange = (e) => {
-
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setColorValue(e.target.value);
         onChange(e.target.value);
     }
     return (
-        <>
-
-            <Box sx={{ border: 1, padding: 1, borderRadius: 2, gap: 3 }}>
-                <Typography maxWidth={"auto"} color="textSecondary" component="div">
-                    {label}
-                </Typography>
-                <input
-                    type="color"
-                    value={colorValue}
-                    onChange={handleChange}
-                    style={{
-                        width: 60,
-                        height: 40,
-                        border: "none",
-                        backgroundColor: "transparent",
-                        cursor: "pointer",
-                        padding: 5
-                    }}
-                    aria-label="Select text color"
-                />
-                <TextField value={colorValue} onChange={handleChange} />
-
-            </Box>
-        </>
+        <Box sx={{ border: '2px solid #1976d2', borderRadius: 2, p: 0.5, display: 'inline-block' }}>
+            <input
+                type="color"
+                value={colorValue}
+                onChange={handleChange}
+                style={{
+                    width: 40,
+                    height: 40,
+                    border: "none",
+                    backgroundColor: "transparent",
+                    cursor: "pointer",
+                    padding: 0,
+                    display: 'block'
+                }}
+                aria-label="Select text color"
+            />
+        </Box>
     )
 }
 
