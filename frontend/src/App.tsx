@@ -6,7 +6,7 @@ function App() {
 
     return(
     <>
-      <Container maxWidth="sm">
+      <Container maxWidth={false} disableGutters>
         <Page />
       </Container>
     </>

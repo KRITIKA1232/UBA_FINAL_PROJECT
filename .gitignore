@@ -7,16 +7,26 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Node modules
 node_modules
 frontend/node_modules
 backend/node_modules
-dist
-dist-ssr
+
+# Build output
+/dist
+/dist-ssr
+frontend/dist
+backend/dist
+
+# Local env files
 *.local
-# static is not ignored, fonts are in backend/fonts
 .env
 backend/.env
-# Ignore uploaded fontsackend/fonts/
+
+# Ignore uploaded fonts
+# static is not ignored, fonts are in backend/fonts
+backend/fonts/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -27,3 +37,22 @@ backend/.env
 *.njsproj
 *.sln
 *.sw?
+
+# Vite cache
+frontend/.vite
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Ignore temporary files
+*.tmp
+*.temp
+
+# Ignore Mac system files
+__MACOSX/
+
+# Ignore test coverage
+coverage/
+
+# Ignore subcomponent folders if built/generated (not source)
+# (No need to ignore src/Components/page/Headerpage or Filterpage as they are source code)

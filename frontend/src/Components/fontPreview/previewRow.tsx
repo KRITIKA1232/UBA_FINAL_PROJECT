@@ -54,8 +54,8 @@ export default function PreviewRow({ preview, img }: PreviewRowProps) {
             sx={{
                 background: "#222",
                 borderRadius: 2,
-                p: 3,
-                minHeight: 80,
+                p: 2,
+                // minHeight: 80,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "flex-start",

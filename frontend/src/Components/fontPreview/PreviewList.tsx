@@ -1,7 +1,5 @@
-import { Box, Typography, IconButton, Tooltip, Divider } from "@mui/material";
-import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import { Box, Typography } from "@mui/material";
 import PreviewRow from "./previewRow";
-import { useState } from "react";
 import type { preview } from "../../types/previewTypes";
 
 type font = {
@@ -27,25 +25,17 @@ function formatFontName(name: string) {
 }
 
 export default function PreviewList({ preview, fonts }: PreviewListProps) {
-    const [copiedFont, setCopiedFont] = useState<number | null>(null);
-
-    const handleCopy = (fontId: number, text: string) => {
-        navigator.clipboard.writeText(text);
-        setCopiedFont(fontId);
-        setTimeout(() => setCopiedFont(null), 1200);
-    };
-
     return (
         <Box sx={{ width: "100%" }}>
             {fonts.map((font, idx) => (
-                <Box key={font.id} sx={{ mb: 4 }}>
+                <Box key={font.id} sx={{ mb: idx === fonts.length - 1 ? 0 : 4 }}>
                     <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
                         <Typography variant="subtitle1" sx={{ color: "#1976d2", fontWeight: 600, fontSize: 18 }}>
                             {formatFontName(font.name)}
                         </Typography>
                     </Box>
                     <PreviewRow preview={preview} img={font} />
-                    {idx < fonts.length - 1 && <Divider sx={{ my: 3, borderColor: "#eee" }} />}
+                    
                 </Box>
             ))}
         </Box>
