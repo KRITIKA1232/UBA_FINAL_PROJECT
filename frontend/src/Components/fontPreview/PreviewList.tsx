@@ -24,20 +24,25 @@ function formatFontName(name: string) {
         .replace(/\b\w/g, c => c.toUpperCase());
 }
 
+// PreviewList component for displaying a list of fonts with previews
 export default function PreviewList({ preview, fonts }: PreviewListProps) {
     return (
         <Box sx={{ width: "100%" }}>
             {fonts.map((font, idx) => (
                 <Box key={font.id} sx={{ mb: idx === fonts.length - 1 ? 0 : 4 }}>
+                    {/* Display the font name */}
                     <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
                         <Typography variant="subtitle1" sx={{ color: "#1976d2", fontWeight: 600, fontSize: 18 }}>
                             {formatFontName(font.name)}
                         </Typography>
                     </Box>
+                    {/* Display the font preview */}
                     <PreviewRow preview={preview} img={font} />
-                    
+
                 </Box>
             ))}
         </Box>
     )
 }
+
+

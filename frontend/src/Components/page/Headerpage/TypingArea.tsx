@@ -6,6 +6,7 @@ interface TypingAreaProps {
     setPreview: (p: preview) => void;
 }
 
+
 export default function TypingArea({ preview, setPreview }: TypingAreaProps) {
     return (
         <Box sx={{ 

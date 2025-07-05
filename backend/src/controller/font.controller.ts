@@ -7,6 +7,8 @@ export class FontsController {
   constructor(fs: FontService) {
     this.fontService = fs;
   }
+
+  // Handles font creation requests from the client
   async CreateFont(req: Request, res: Response) {
     const file = req.file;
     console.log(file.filename);
@@ -16,6 +18,7 @@ export class FontsController {
     res.send(result);
   }
 
+  // Handles requests to fetch a list of fonts
   async ReadFonts(req: Request, res: Response) {
     const offset = Number(req.query.offset) || 0;
     const limit = Number(req.query.limit) || 1000;
@@ -28,10 +31,10 @@ export class FontsController {
       offset,
       filters
     );
-
     res.send(filename);
   }
 
+  // Handles requests to filter fonts
   async Filter(req: Request, res: Response) {
     const { filter } = req.query;
     let response = (filter as string).split(",");
